@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class BusinessesController < ApplicationController
+  before_action :authenticate_admin!, only: %w[new create edit update destroy]
   before_action :set_business, only: %w[show edit update destroy]
 
   def index
