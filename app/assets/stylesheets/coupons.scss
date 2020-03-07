@@ -3,9 +3,5 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 .barcode-display {
-  padding-bottom: 5px;
-  table.barby-barcode { border-spacing: 0; }
-  tr.barby-row {}
-  td.barby-cell { width: 3px; height: 50px; }
-  td.barby-cell.on { background: #000; }
+  text-align: center;
 }

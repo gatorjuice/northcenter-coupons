@@ -5,7 +5,7 @@
     <div class="card-body">
       <h5 class="card-title"><%= coupon.name %></h5>
       <p class="card-text"><%= coupon.description %></p>
-      <%= link_to 'Use Coupon', business_coupon_path(coupon), class: 'btn btn-primary' %>
+      <%= link_to 'Use Coupon', coupon_path(coupon), class: 'btn btn-primary' %>
     </div>
   </div>
 <% end %>

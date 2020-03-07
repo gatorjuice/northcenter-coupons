@@ -5,6 +5,6 @@ Rails.application.routes.draw do
   root 'businesses#index'
 
   resources :businesses do
-    resources :coupons
+    resources :coupons, shallow: true
   end
 end

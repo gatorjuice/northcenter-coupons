@@ -8,11 +8,7 @@ class CouponsController < ApplicationController
   def create; end
 
   def show
-    require 'barby/barcode/code_128'
-    require 'barby/outputter/html_outputter'
-
-    @coupon = Coupon.find(params.require(:business_id))
-    @barcode = Barby::Code128B.new(@coupon.code).to_html.html_safe
+    @coupon = Coupon.find(params.require(:id))
   end
 
   def edit; end

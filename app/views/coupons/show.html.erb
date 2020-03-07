@@ -2,7 +2,7 @@
   <div class="card-body">
     <h5 class="card-title"><%= @coupon.name %></h5>
     <p class="card-text"><%= @coupon.description %></p>
-    <div class="barcode-display"><%= @barcode %></div>
+    <div class="barcode-display"><%= @coupon.barcode_svg %></div>
     <div class="card-footer text-muted">
       Valid <%= @coupon.start_date %> - <%= @coupon.end_date %>
     </div>
