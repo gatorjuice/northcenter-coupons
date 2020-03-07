@@ -39,8 +39,10 @@ ActiveRecord::Schema.define(version: 2020_03_07_194143) do
     t.date "start_date", null: false
     t.date "end_date", null: false
     t.integer "business_id", null: false
+    t.string "code"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["business_id"], name: "index_coupons_on_business_id"
   end
 
 end
