@@ -13,11 +13,11 @@ class BusinessesController < ApplicationController
   end
 
   def create
-    @business = Business.new(business_params)
+    business = Business.new(business_params)
 
-    if @business.save
+    if business.save
       flash[:success] = 'Business added.'
-      redirect_to business_path(@business)
+      redirect_to business_path(business)
     else
       flash[:danger] = 'Business could not be added.'
       redirect_to new_business_path
