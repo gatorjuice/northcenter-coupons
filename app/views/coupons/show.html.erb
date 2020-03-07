@@ -2,8 +2,10 @@
   <div class="card-body">
     <h5 class="card-title"><%= @coupon.name %></h5>
     <p class="card-text"><%= @coupon.description %></p>
-
     <div class="barcode-display"><%= @barcode %></div>
+    <div class="card-footer text-muted">
+      Valid <%= @coupon.start_date %> - <%= @coupon.end_date %>
+    </div>
   </div>
   <%= link_to 'Back', business_path(@coupon.business), class: 'btn btn-primary' %>
 </div>
