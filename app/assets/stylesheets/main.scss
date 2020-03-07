@@ -1,0 +1,15 @@
+// Place all the styles related to the businesses controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+body {
+  padding-top: 60px;
+  background-color: rgba(236, 159, 74, 0.2);
+}
+
+.navbar {
+  background-color: rgb(236, 159, 74);
+  a {
+    color: inherit;
+  }
+}
