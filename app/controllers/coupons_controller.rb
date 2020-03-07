@@ -7,7 +7,9 @@ class CouponsController < ApplicationController
 
   def create; end
 
-  def show; end
+  def show
+    @coupon = Coupon.find(params.require(:id))
+  end
 
   def edit; end
 

@@ -16,13 +16,17 @@ class BusinessesController < ApplicationController
     @business = Business.new(business_params)
 
     if @business.save
-      redirect_to @business
+      flash[:success] = 'Business added.'
+      redirect_to business_path
     else
-      render :new
+      flash[:danger] = 'Business could not be added.'
+      redirect_to new_business_path
     end
   end
 
-  def show; end
+  def show
+    @coupons = @business.coupons
+  end
 
   def edit; end
 
@@ -30,7 +34,7 @@ class BusinessesController < ApplicationController
     if @business.update(business_params)
       redirect_to @business
     else
-      render :edit
+      redirect_to edit_business_path
     end
   end
 
@@ -38,7 +42,7 @@ class BusinessesController < ApplicationController
     if @business.delete
       redirect_to businesses_path
     else
-      render :edit
+      redirect_to edit_business_path
     end
   end
 
