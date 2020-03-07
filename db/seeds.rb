@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 Coupon.create!(
   name: "20\% off!",
   description: 'welcome to dev business',

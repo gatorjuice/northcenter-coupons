@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class BusinessesController < ApplicationController
   before_action :set_business, only: %w[show edit update destroy]
 
@@ -19,11 +21,9 @@ class BusinessesController < ApplicationController
     end
   end
 
-  def show
-  end
+  def show; end
 
-  def edit
-  end
+  def edit; end
 
   def update
     if @business.update(business_params)
