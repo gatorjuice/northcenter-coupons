@@ -17,7 +17,7 @@ class BusinessesController < ApplicationController
 
     if @business.save
       flash[:success] = 'Business added.'
-      redirect_to business_path
+      redirect_to business_path(@business)
     else
       flash[:danger] = 'Business could not be added.'
       redirect_to new_business_path
@@ -32,7 +32,7 @@ class BusinessesController < ApplicationController
 
   def update
     if @business.update(business_params)
-      redirect_to @business
+      redirect_to business_path(@business)
     else
       redirect_to edit_business_path
     end
