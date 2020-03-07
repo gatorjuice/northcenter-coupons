@@ -6,6 +6,7 @@ class CreateCoupons < ActiveRecord::Migration[5.2]
       t.date :start_date, null: false
       t.date :end_date, null: false
       t.integer :business_id, null: false
+      t.string :code
 
       t.timestamps
     end
