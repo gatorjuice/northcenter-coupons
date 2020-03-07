@@ -1,2 +1,8 @@
-<h1>Businesses#destroy</h1>
-<p>Find me in app/views/businesses/destroy.html.erb</p>
+<%= form_with model: @business do |f| %>
+  <div class="form-group">
+    <%= label_tag(:name, 'Name') %>
+    <%= f.text_field :name, class: 'form-control' %>
+    <small id="nameHelp" class="form-text text-muted">Enter the businesses name</small>
+  </div>
+  <%= f.submit 'Add Business', class: 'btn btn-primary' %>
+<% end %>

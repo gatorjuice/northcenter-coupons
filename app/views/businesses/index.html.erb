@@ -1,2 +1,14 @@
-<h1>Businesses#index</h1>
-<p>Find me in app/views/businesses/index.html.erb</p>
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Name</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @businesses.each do |business| %>
+      <tr>
+        <td><%= link_to business.name, business_path(business) %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

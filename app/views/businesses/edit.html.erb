@@ -1,2 +1,9 @@
-<h1>Businesses#index</h1>
-<p>Find me in app/views/businesses/index.html.erb</p>
+<%= form_with model: @business do |f| %>
+  <div class="form-group">
+    <%= label_tag(:name, 'Name') %>
+    <%= f.text_field :name, class: 'form-control' %>
+    <small id="nameHelp" class="form-text text-muted">Update the businesses name</small>
+  </div>
+  <%= f.submit 'Update Business', class: 'btn btn-primary' %>
+  <%= link_to "Delete Business", business_path(@business), method: :delete, data: { confirm: "You sure?" } %>
+<% end %>
