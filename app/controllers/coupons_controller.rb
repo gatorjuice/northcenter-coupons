@@ -10,15 +10,12 @@ class CouponsController < ApplicationController
   end
 
   def create
-    coupon = Coupon.new(coupon_params)
-
-    if coupon.save
-      flash[:success] = 'Coupon Saved.'
-      redirect_to business_path(coupon.business)
-    else
-      flash[:danger] = 'Coupon could not be saved.'
-      redirect_to new_business_coupon_path(coupon.business)
-    end
+    coupon = Coupon.create!(coupon_params)
+    flash[:success] = 'Coupon Saved.'
+    redirect_to business_path(coupon.business)
+  rescue StandardError => e
+    flash[:danger] = e
+    redirect_to new_business_coupon_path(coupon.business)
   end
 
   def show

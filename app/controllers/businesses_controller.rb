@@ -13,15 +13,12 @@ class BusinessesController < ApplicationController
   end
 
   def create
-    business = Business.new(business_params)
-
-    if business.save
-      flash[:success] = 'Business added.'
-      redirect_to business_path(business)
-    else
-      flash[:danger] = 'Business could not be added.'
-      redirect_to new_business_path
-    end
+    business = Business.create!(business_params)
+    flash[:success] = 'Business added.'
+    redirect_to business_path(business)
+  rescue StandardError => e
+    flash[:danger] = e
+    redirect_to new_business_path
   end
 
   def show
@@ -31,11 +28,12 @@ class BusinessesController < ApplicationController
   def edit; end
 
   def update
-    if @business.update(business_params)
-      redirect_to business_path(@business)
-    else
-      redirect_to edit_business_path
-    end
+    @business.update!(business_params)
+    flash[:success] = 'Business updated.'
+    redirect_to business_path(@business)
+  rescue StandardError => e
+    flash[:danger] = e
+    redirect_to edit_business_path
   end
 
   def destroy
