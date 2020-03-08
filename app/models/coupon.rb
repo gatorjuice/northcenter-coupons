@@ -7,10 +7,10 @@ class Coupon < ApplicationRecord
   belongs_to :business
 
   def barcode_svg
-    if code
-      Barby::Code128B.new(code).to_svg.html_safe
-    else
+    if code.blank?
       'no barcode available'
+    else
+      Barby::Code128B.new(code).to_svg.html_safe
     end
   end
 end
