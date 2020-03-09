@@ -1,6 +1,13 @@
-<p class="float-right"><%= link_to '+ add a coupon', new_business_coupon_path(@business) %></p>
+<% if current_admin %>
+  <p class="float-right"><%= link_to '+ add a coupon', new_business_coupon_path(@business) %></p>
+<% end %>
+
 <h2><%= @business.name %></h2>
-<%= link_to 'Edit', edit_business_path(@business) %>
+
+<% if current_admin %>
+  <%= link_to 'Edit', edit_business_path(@business) %>
+<% end %>
+
 <% @coupons.each do |coupon| %>
   <div class="card">
     <div class="card-body">

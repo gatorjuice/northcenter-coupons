@@ -1,6 +1,8 @@
-<div class="float-right">
-  <%= link_to '+ Add a New Business', new_business_path %>
-</div>
+<% if current_admin %>
+  <div class="float-right">
+      <%= link_to '+ Add a New Business', new_business_path %>
+  </div>
+<% end %>
 <table class="table">
   <thead>
     <tr>

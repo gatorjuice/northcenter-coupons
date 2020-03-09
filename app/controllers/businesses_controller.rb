@@ -5,7 +5,12 @@ class BusinessesController < ApplicationController
   before_action :set_business, only: %w[show edit update destroy]
 
   def index
-    @businesses = Business.order(:name)
+    @businesses =
+      if params[:q]
+        Business.where('LOWER(name) LIKE ?', "%#{params[:q].downcase}%")
+      else
+        Business.order(:name)
+      end
   end
 
   def new
