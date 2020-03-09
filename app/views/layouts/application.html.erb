@@ -14,10 +14,19 @@
 
   <body>
     <nav class="navbar fixed-top navbar-expand-lg navbar-dark">
-      <span class="navbar-brand mb-0 h1"><%= link_to 'Northcenter Coupons', businesses_path %></span>
+      <span class="navbar-brand mb-0 h1">
+        <%= link_to 'Northcenter Coupons', businesses_path %>
+      </span>
 
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-toggle="collapse"
+        data-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      ><span class="navbar-toggler-icon"></span>
       </button>
 
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -25,6 +34,7 @@
           <li class="nav-item active">
             <% if current_admin %>
               <%= link_to 'Log out', destroy_admin_session_path, method: :delete, class: 'nav-link' %>
+              <%= link_to 'Add a New Business', new_business_path %>
             <% else %>
               <%= link_to 'Admin log in', new_admin_session_path, class: 'nav-link' %>
             <% end %>
@@ -32,7 +42,7 @@
         </ul>
 
         <%= form_tag '/search', method: :get, class: 'form-inline my-2 my-lg-0' do %>
-          <%= text_field_tag :q, params[:q], class: 'form-control mr-sm-2', placeholder: 'Search by Business Name' %>
+          <%= text_field_tag :q, params[:q], class: 'form-control mr-sm-2', placeholder: 'Search by Business' %>
           <%= submit_tag 'Search', name: nil, class: 'btn btn-primary my-2 my-sm-0' %>
         <% end %>
       </div>

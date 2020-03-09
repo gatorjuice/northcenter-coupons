@@ -3,7 +3,7 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 body {
-  padding-top: 60px;
+  padding-top: 55px;
   background-color: rgba(236, 159, 74, 0.2);
 }
 
@@ -12,4 +12,8 @@ body {
   a {
     color: inherit;
   }
+}
+
+.table-header {
+  text-align: center;
 }
