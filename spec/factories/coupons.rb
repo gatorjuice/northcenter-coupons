@@ -7,5 +7,6 @@ FactoryBot.define do
     start_date { 5.days.ago }
     end_date { 5.days.from_now }
     code { '1234567890' }
+    business
   end
 end

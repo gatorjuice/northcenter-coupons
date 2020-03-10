@@ -3,17 +3,23 @@
 require 'rails_helper'
 
 RSpec.describe CouponsController, type: :controller do
-  describe 'GET #index' do
+  describe 'GET #show' do
+    let(:coupon) { create(:coupon) }
+
+    before do
+      get :show, params: { id: coupon.id }
+    end
+
     it 'returns http success' do
-      get :index
       expect(response).to have_http_status(:success)
     end
-  end
 
-  describe 'GET #show' do
-    it 'returns http success' do
-      get :show
-      expect(response).to have_http_status(:success)
+    it 'assigns @coupon' do
+      expect(assigns(:coupon)).to eq(coupon)
+    end
+
+    it 'renders the show view' do
+      expect(response).to render_template(:show)
     end
   end
 
