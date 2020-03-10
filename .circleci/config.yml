@@ -1,8 +1,8 @@
 version: 2.1
 jobs:
   build:
-    docker: # run the steps with Docker
-      - image: circleci/ruby:2.6.5-alpine
+    docker:
+      - image: circleci/ruby:2.6.5-jessie-node
         environment:
           BUNDLE_JOBS: 3
           BUNDLE_RETRY: 3
