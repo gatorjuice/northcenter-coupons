@@ -3,51 +3,99 @@
 require 'rails_helper'
 
 RSpec.describe CouponsController, type: :controller do
-  describe 'GET #show' do
-    let(:coupon) { create(:coupon) }
+  include Devise::Test::ControllerHelpers
+
+  context 'when admin signed in' do
+    let!(:admin) { create(:admin) }
 
     before do
-      get :show, params: { id: coupon.id }
+      sign_in(admin)
     end
 
-    it 'returns http success' do
-      expect(response).to have_http_status(:success)
+    describe 'GET #show' do
+      let(:coupon) { create(:coupon) }
+
+      before do
+        get :show, params: { id: coupon.id }
+      end
+
+      it 'returns http success' do
+        expect(response).to have_http_status(:success)
+      end
+
+      it 'assigns @coupon' do
+        expect(assigns(:coupon)).to eq(coupon)
+      end
+
+      it 'renders the show view' do
+        expect(response).to render_template(:show)
+      end
     end
 
-    it 'assigns @coupon' do
-      expect(assigns(:coupon)).to eq(coupon)
-    end
+    describe 'GET #create' do
+      subject(:create_coupon) { get :create, params: params }
 
-    it 'renders the show view' do
-      expect(response).to render_template(:show)
+      let!(:business) { create(:business) }
+
+      let(:params) do
+        {
+          business_id: business.id,
+          coupon: attributes_for(:coupon).merge(business_id: business.id)
+        }
+      end
+
+      it 'returns http success' do
+        create_coupon
+        expect(response).to have_http_status(:redirect)
+      end
+
+      it 'creates a coupon' do
+        expect {create_coupon}.to change { Coupon.count }.by(1)
+      end
     end
   end
 
-  describe 'GET #update' do
-    it 'returns http success' do
-      get :update
-      expect(response).to have_http_status(:success)
-    end
-  end
+  context 'when admin is not signed in' do
+    describe 'GET #show' do
+      let(:coupon) { create(:coupon) }
 
-  describe 'GET #create' do
-    it 'returns http success' do
-      get :create
-      expect(response).to have_http_status(:success)
-    end
-  end
+      before do
+        get :show, params: { id: coupon.id }
+      end
 
-  describe 'GET #edit' do
-    it 'returns http success' do
-      get :edit
-      expect(response).to have_http_status(:success)
-    end
-  end
+      it 'returns http success' do
+        expect(response).to have_http_status(:success)
+      end
 
-  describe 'GET #destroy' do
-    it 'returns http success' do
-      get :destroy
-      expect(response).to have_http_status(:success)
+      it 'assigns @coupon' do
+        expect(assigns(:coupon)).to eq(coupon)
+      end
+
+      it 'renders the show view' do
+        expect(response).to render_template(:show)
+      end
+    end
+
+    describe 'GET #create' do
+      subject(:create_coupon) { get :create, params: params }
+
+      let!(:business) { create(:business) }
+
+      let(:params) do
+        {
+          business_id: business.id,
+          coupon: attributes_for(:coupon).merge(business_id: business.id)
+        }
+      end
+
+      it 'returns http success' do
+        create_coupon
+        expect(response).to have_http_status(:redirect)
+      end
+
+      it 'creates a coupon' do
+        expect {create_coupon}.to change { Coupon.count }.by(0)
+      end
     end
   end
 end

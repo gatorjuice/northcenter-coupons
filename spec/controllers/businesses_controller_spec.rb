@@ -53,32 +53,49 @@ RSpec.describe BusinessesController, type: :controller do
     end
 
     describe 'GET #update' do
-      let(:business_params) { { business: { name: 'Test Agency' } } }
+      let(:params) { { id: business_a.id, business: { name: 'New Name' } } }
 
-      before do
-        put :update, params: business_params
-      end
+      before { put :update, params: params }
 
       it 'returns http success' do
-        expect(response).to have_http_status(:success)
+        expect(response).to have_http_status(:redirect)
       end
 
-      it 'renders the index view' do
-        expect(response).to render_template(:show)
+      it 'updates the business' do
+        expect(business_a.reload.name).to eq('New Name')
       end
     end
 
     describe 'GET #create' do
+      subject(:create_business) { post :create, params: params }
+
+      let(:params) { { business: attributes_for(:business) } }
+
       it 'returns http success' do
-        get :create
-        expect(response).to have_http_status(:success)
+        create_business
+        expect(response).to have_http_status(:redirect)
+      end
+
+      it 'creates a business' do
+        expect { create_business }.to change { Business.count }.by(1)
       end
     end
 
     describe 'GET #edit' do
+      before do
+        get :edit, params: { id: business_a.id }
+      end
+
       it 'returns http success' do
-        get :edit
         expect(response).to have_http_status(:success)
+      end
+
+      it 'assigns @business' do
+        expect(assigns(:business)).to eq(business_a)
+      end
+
+      it 'renders the edit view' do
+        expect(response).to render_template(:edit)
       end
     end
 
@@ -129,23 +146,41 @@ RSpec.describe BusinessesController, type: :controller do
     end
 
     describe 'GET #update' do
+      let(:params) { { id: business_a.id, business: { name: 'New Name' } } }
+
+      before { put :update, params: params }
+
       it 'returns http success' do
-        get :update
-        expect(response).to have_http_status(:success)
+        expect(response).to have_http_status(:redirect)
+      end
+
+      it 'does not update the business' do
+        expect(business_a.reload.name).to eq('business_a')
       end
     end
 
     describe 'GET #create' do
+      subject(:create_business) { post :create, params: params }
+
+      let(:params) { { business: attributes_for(:business) } }
+
       it 'returns http success' do
-        get :create
-        expect(response).to have_http_status(:success)
+        create_business
+        expect(response).to have_http_status(:redirect)
+      end
+
+      it 'creates a business' do
+        expect { create_business }.to change { Business.count }.by(0)
       end
     end
 
     describe 'GET #edit' do
+      before do
+        get :edit, params: { id: business_a.id }
+      end
+
       it 'returns http success' do
-        get :edit
-        expect(response).to have_http_status(:success)
+        expect(response).to have_http_status(:redirect)
       end
     end
 
