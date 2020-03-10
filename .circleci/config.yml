@@ -4,6 +4,7 @@ jobs:
     docker:
       - image: circleci/ruby:2.6.5-buster
         environment:
+          BUNDLER_VERSION: 2.4.1
           BUNDLE_JOBS: 3
           BUNDLE_RETRY: 3
           BUNDLE_PATH: vendor/bundle
@@ -21,6 +22,10 @@ jobs:
       - run:
           name: Which bundler?
           command: bundle -v
+
+      - run:
+          name: install bundler
+          command: gem install bundle
 
       - restore_cache:
           keys:
