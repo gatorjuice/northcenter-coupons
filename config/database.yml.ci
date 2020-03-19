@@ -1,0 +1,7 @@
+test:
+  adapter: postgresql
+  encoding: unicode
+  host: localhost
+  user: northcenter-coupons
+  pool: 5
+  database: northcenter-coupons_test
