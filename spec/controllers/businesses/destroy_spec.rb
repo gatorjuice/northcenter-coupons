@@ -11,11 +11,7 @@ RSpec.describe BusinessesController, type: :controller do
     let!(:business) { create(:business, :with_coupons) }
 
     context 'when admin is signed in' do
-      let!(:admin) { create(:admin) }
-
-      before do
-        sign_in(admin)
-      end
+      before { sign_in(create(:admin)) }
 
       it 'deletes the business' do
         expect { destroy_business }.to change { Business.count }.by(-1)

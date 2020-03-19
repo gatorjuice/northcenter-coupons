@@ -9,9 +9,7 @@ RSpec.describe BusinessesController, type: :controller do
     subject(:create_business) { post :create, params: params }
 
     context 'when admin is signed in' do
-      let!(:admin) { create(:admin) }
-
-      before { sign_in(admin) }
+      before { sign_in(create(:admin)) }
 
       let(:params) { { business: attributes_for(:business) } }
 

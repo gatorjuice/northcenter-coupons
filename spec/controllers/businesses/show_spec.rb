@@ -11,10 +11,8 @@ RSpec.describe BusinessesController, type: :controller do
     let!(:business) { create(:business, :with_coupons, name: 'business') }
 
     context 'when admin is signed in' do
-      let!(:admin) { create(:admin) }
-
       before do
-        sign_in(admin)
+        sign_in(create(:admin))
         show_business
       end
 

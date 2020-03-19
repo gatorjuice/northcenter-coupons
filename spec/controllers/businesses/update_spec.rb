@@ -12,10 +12,8 @@ RSpec.describe BusinessesController, type: :controller do
     let(:params) { { id: business.id, business: { name: 'New Name' } } }
 
     context 'when admin is signed in' do
-      let!(:admin) { create(:admin) }
-
       before do
-        sign_in(admin)
+        sign_in(create(:admin))
         update_business
       end
 
