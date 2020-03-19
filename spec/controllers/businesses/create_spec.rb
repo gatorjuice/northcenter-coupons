@@ -15,7 +15,7 @@ RSpec.describe BusinessesController, type: :controller do
 
       let(:params) { { business: attributes_for(:business) } }
 
-      it 'returns http success' do
+      it 'returns http redirect' do
         create_business
         expect(response).to have_http_status(:redirect)
       end
@@ -28,7 +28,7 @@ RSpec.describe BusinessesController, type: :controller do
     context 'when admin is not signed in' do
       let(:params) { { business: attributes_for(:business) } }
 
-      it 'returns http success' do
+      it 'returns http redirect' do
         create_business
         expect(response).to have_http_status(:redirect)
       end

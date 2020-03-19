@@ -19,7 +19,7 @@ RSpec.describe BusinessesController, type: :controller do
         update_business
       end
 
-      it 'returns http success' do
+      it 'returns http redirect' do
         expect(response).to have_http_status(:redirect)
       end
 
@@ -31,7 +31,7 @@ RSpec.describe BusinessesController, type: :controller do
     context 'when admin is not signed in' do
       before { update_business }
 
-      it 'returns http success' do
+      it 'returns http redirect' do
         expect(response).to have_http_status(:redirect)
       end
 
