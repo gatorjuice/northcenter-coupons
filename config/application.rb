@@ -29,9 +29,13 @@ module NorthcenterCoupons
     # -- all .rb files in that directory are automatically loaded after loading
     # the framework and any gems in your application.
 
-    # Don't generate system test files.
-    config.generators.system_tests = nil
-
-    config.generators.javascript_engine = :js
+    config.generators do |g|
+      # Don't generate system test files.
+      g.system_tests = nil
+      # Don't generate rails views test files
+      g.view_specs = false
+      # Create javascript file as opposed to coffeescript
+      g.javascript_engine = :js
+    end
   end
 end
