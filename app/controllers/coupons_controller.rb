@@ -2,6 +2,7 @@
 
 class CouponsController < ApplicationController
   before_action :authenticate_admin!, only: %w[create edit update destroy]
+  before_action :set_coupon, only: %w[show edit update]
 
   def index; end
 
@@ -18,13 +19,18 @@ class CouponsController < ApplicationController
     redirect_to new_business_coupon_path(coupon.business)
   end
 
-  def show
-    @coupon = Coupon.find(params.require(:id))
-  end
+  def show; end
 
   def edit; end
 
-  def update; end
+  def update
+    @coupon.update!(coupon_params)
+    flash[:success] = 'Coupon Updated.'
+    redirect_to coupon_path(@coupon)
+  rescue StandardError => e
+    flash[:danger] = e
+    redirect_to new_business_coupon_path(@coupon.business)
+  end
 
   def destroy; end
 
@@ -39,5 +45,9 @@ class CouponsController < ApplicationController
       :business_id,
       :code
     )
+  end
+
+  def set_coupon
+    @coupon = Coupon.find(params.require(:id))
   end
 end

@@ -37,7 +37,7 @@ class BusinessesController < ApplicationController
   end
 
   def destroy
-    if @business.delete
+    if @business.destroy
       flash[:success] = 'Business deleted.'
       redirect_to businesses_path
     else
