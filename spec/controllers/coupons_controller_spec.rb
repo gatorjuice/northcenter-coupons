@@ -5,33 +5,13 @@ require 'rails_helper'
 RSpec.describe CouponsController, type: :controller do
   include Devise::Test::ControllerHelpers
 
-  context 'when admin signed in' do
+  xcontext 'when admin signed in' do
     let!(:admin) { create(:admin) }
 
     before do
       sign_in(admin)
     end
 
-    describe 'GET #show' do
-      let(:coupon) { create(:coupon) }
-
-      before do
-        get :show, params: { id: coupon.id }
-      end
-
-      it 'returns http success' do
-        expect(response).to have_http_status(:success)
-      end
-
-      it 'assigns @coupon' do
-        expect(assigns(:coupon)).to eq(coupon)
-      end
-
-      it 'renders the show view' do
-        expect(response).to render_template(:show)
-      end
-    end
-
     describe 'GET #create' do
       subject(:create_coupon) { get :create, params: params }
 
@@ -50,32 +30,28 @@ RSpec.describe CouponsController, type: :controller do
       end
 
       it 'creates a coupon' do
-        expect {create_coupon}.to change { Coupon.count }.by(1)
+        expect { create_coupon }.to change { Coupon.count }.by(1)
+      end
+    end
+
+    describe 'GET #edit' do
+      subject(:edit_coupon) { get :edit, params: params }
+
+      let!(:coupon) { create(:coupon) }
+
+      let(:params) { { id: coupon.id } }
+
+      it 'assigns @coupon' do
+        expect(assigns(:coupon)).to eq(coupon)
+      end
+
+      it 'renders the edit view' do
+        expect(response).to render_template(:edit)
       end
     end
   end
 
-  context 'when admin is not signed in' do
-    describe 'GET #show' do
-      let(:coupon) { create(:coupon) }
-
-      before do
-        get :show, params: { id: coupon.id }
-      end
-
-      it 'returns http success' do
-        expect(response).to have_http_status(:success)
-      end
-
-      it 'assigns @coupon' do
-        expect(assigns(:coupon)).to eq(coupon)
-      end
-
-      it 'renders the show view' do
-        expect(response).to render_template(:show)
-      end
-    end
-
+  xcontext 'when admin is not signed in' do
     describe 'GET #create' do
       subject(:create_coupon) { get :create, params: params }
 
@@ -94,7 +70,24 @@ RSpec.describe CouponsController, type: :controller do
       end
 
       it 'creates a coupon' do
-        expect {create_coupon}.to change { Coupon.count }.by(0)
+        expect { create_coupon }.to change { Coupon.count }.by(0)
+      end
+    end
+
+    describe 'GET #edit' do
+      subject(:edit_coupon) { get :edit, params: params }
+
+      let!(:coupon) { create(:coupon) }
+
+      let(:params) { { id: coupon.id } }
+
+      it 'returns a redirect' do
+        edit_coupon
+        expect(response).to have_http_status(:redirect)
+      end
+
+      it 'does not render the edit view' do
+        expect(response).to_not render_template(:show)
       end
     end
   end

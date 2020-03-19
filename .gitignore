@@ -28,3 +28,5 @@
 
 # Ignore coverage for now
 /coverage
+
+.DS_Store
