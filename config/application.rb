@@ -34,8 +34,6 @@ module NorthcenterCoupons
       g.system_tests = nil
       # Don't generate rails views test files
       g.view_specs = false
-      # Create javascript file as opposed to coffeescript
-      g.javascript_engine = :js
     end
   end
 end
