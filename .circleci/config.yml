@@ -1,61 +1,57 @@
-version: 2.1
+---
+version: 2
 jobs:
   build:
+    working_directory: ~/northcenter-coupons
     docker:
-      - image: circleci/ruby:2.6.5-buster
+      - image: circleci/ruby:2.6.5-node-browsers
         environment:
           BUNDLE_JOBS: 3
           BUNDLE_RETRY: 3
           BUNDLE_PATH: vendor/bundle
-          PGHOST: 127.0.0.1
-          PGUSER: circleci-demo-ruby
+          PGHOST: localhost
+          PGUSER: northcenter-coupons
           RAILS_ENV: test
-      - image: circleci/postgres:9.6.9-alpine
+      - image: circleci/postgres:9.5
         environment:
-          POSTGRES_USER: circleci-demo-ruby
-          POSTGRES_DB: rails_blog
-          POSTGRES_PASSWORD: ""
+          POSTGRES_USER: northcenter-coupons
+          POSTGRES_DB: northcenter-coupons_test
+          POSTGRES_PASSWORD: password
     steps:
       - checkout
+
+      - run:
+          name: Configure Bundler
+          command: |
+            echo 'export BUNDLER_VERSION=$(cat Gemfile.lock | tail -1 | tr -d " ")' >> $BASH_ENV
+            source $BASH_ENV
+            gem install bundler
 
       - run:
           name: Which bundler?
           command: bundle -v
 
-      - run:
-          name: install bundler
-          command: gem install bundler:2.1.4
+      - type: cache-restore
+        name: Restore bundle cache
+        key: northcenter-coupons-{{ checksum "Gemfile.lock" }}
 
-      - restore_cache:
-          keys:
-            - northcenter-coupons-v1-{{ checksum "Gemfile.lock" }}
-            - northcenter-coupons-v1-
+      - run: bundle install --path vendor/bundle
 
-      - run:
-          name: Bundle Install
-          command: bundle check --path vendor/bundle || bundle install --deployment
-
-      - save_cache:
-          key: northcenter-coupons-v1-{{ checksum "Gemfile.lock" }}
-          paths:
-            - vendor/bundle
+      - type: cache-save
+        name: Store bundle cache
+        key: northcenter-coupons-{{ checksum "Gemfile.lock" }}
+        paths:
+          - vendor/bundle
 
       - run:
           name: Wait for DB
           command: dockerize -wait tcp://localhost:5432 -timeout 1m
-
       - run:
-          name: Database setup
-          command: bin/rails db:schema:load --trace
-
-      - run:
-          name: Run rspec in parallel
+          name: DB Setup
           command: |
-            bundle exec rspec --profile 10 \
-                              --format RspecJunitFormatter \
-                              --out test_results/rspec.xml \
-                              --format progress \
-                              $(circleci tests glob "spec/**/*_spec.rb" | circleci tests split --split-by=timings)
+            cp config/database.yml.ci config/database.yml
+            bin/rails db:schema:load
 
-      - store_test_results:
-          path: test_results
+      - run: bundle exec rubocop
+
+      - run: bundle exec rspec
