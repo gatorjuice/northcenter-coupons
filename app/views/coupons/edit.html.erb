@@ -1,2 +1,6 @@
-<h1>Coupons#index</h1>
-<p>Find me in app/views/coupons/index.html.erb</p>
+<h2>Edit coupon for <%= @coupon.business.name %></h2>
+<%= form_with model: @coupon, url: "/coupons/#{@coupon.id}", method: :patch do |f| %>
+  <%= render template: 'coupons/shared/coupon', locals: { f: f } %>
+
+  <%= f.submit 'Submit', class: 'btn btn-primary' %>
+<% end %>

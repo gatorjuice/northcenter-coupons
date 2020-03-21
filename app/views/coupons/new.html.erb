@@ -1,35 +1,8 @@
 <h2>Add a coupon for <%= @coupon.business.name %></h2>
 <%= form_with model: @coupon, url: business_coupons_path do |f| %>
   <%= f.hidden_field(:business_id, value: @coupon.business_id) %>
-  <div class="form-group">
-    <%= label_tag(:name, 'Name') %>
-    <%= f.text_field :name, class: 'form-control', placeholder: '$5 Off!', required: true %>
-    <small id="nameHelp" class="form-text text-muted">Enter the featured coupon text</small>
-  </div>
 
-  <div class="form-group">
-    <%= label_tag(:description, 'Description') %>
-    <%= f.text_field :description, class: 'form-control', required: true %>
-    <small id="descriptionHelp" class="form-text text-muted">Enter a more detailed description</small>
-  </div>
-
-  <div class="form-group">
-    <%= label_tag(:start_date, 'Start Date') %>
-    <%= f.date_field :start_date, class: 'form-control', required: true %>
-    <small id="startDateHelp" class="form-text text-muted">When does the promotion start?</small>
-  </div>
-
-  <div class="form-group">
-    <%= label_tag(:end_date, 'End Date') %>
-    <%= f.date_field :end_date, class: 'form-control', required: true %>
-    <small id="startDateHelp" class="form-text text-muted">When does the promotion end?</small>
-  </div>
-
-  <div class="form-group">
-    <%= label_tag(:code, 'Code') %>
-    <%= f.text_field :code, class: 'form-control' %>
-    <small id="codeHelp" class="form-text text-muted">Code will be used to generate a bar code.</small>
-  </div>
+  <%= render template: 'coupons/shared/coupon', locals: { f: f } %>
 
   <%= f.submit 'Add Coupon', class: 'btn btn-primary' %>
 <% end %>
