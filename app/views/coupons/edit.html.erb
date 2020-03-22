@@ -1,6 +1,6 @@
 <h2>Edit coupon for <%= @coupon.business.name %></h2>
-<%= form_with model: @coupon, url: "/coupons/#{@coupon.id}", method: :patch do |f| %>
-  <%= render template: 'coupons/shared/coupon', locals: { f: f } %>
+<%= form_with model: @coupon, url: "/coupons/#{@coupon.id}", method: :patch do |form| %>
+  <%= render partial: 'coupon', locals: { f: form } %>
 
-  <%= f.submit 'Submit', class: 'btn btn-primary' %>
+  <%= form.submit 'Submit', class: 'btn btn-primary' %>
 <% end %>
