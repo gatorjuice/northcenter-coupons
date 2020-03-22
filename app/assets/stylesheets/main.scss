@@ -3,17 +3,29 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 body {
-  padding-top: 60px;
+  padding-top: 68px;
   background-color: rgba(236, 159, 74, 0.2);
 }
 
 .navbar {
-  background-color: rgb(236, 159, 74);
+  background-color: rgb(205, 208, 209);
   a {
     color: inherit;
+  };
+  .northcenter-logo{
+    height: 39px;
+    width: 175px;
   }
 }
 
 .table-header {
   text-align: center;
+}
+
+.btn-northcenter {
+  background-color: rgb(236, 159, 74)
+}
+
+.northcenter-logo{
+  
 }
