@@ -38,6 +38,7 @@ gem 'bootsnap', '>= 1.1.0', require: false
 
 # generate barcodes from coupons
 gem 'barby'
+gem "aws-sdk-s3", require: false
 
 group :test do
   gem 'simplecov', require: false

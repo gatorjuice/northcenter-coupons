@@ -7,7 +7,14 @@
   <tbody>
     <% @businesses.each do |business| %>
       <tr>
-        <td><%= link_to business.name, business_path(business) %></td>
+        <td>
+          <%= link_to business.name, business_path(business) %>
+        </td>
+        <td>
+          <% if business.logo.attached? %>
+            <%= image_tag business.logo, class: 'rounded float-right img-thumbnail' %>
+          <% end %>
+        </td>
       </tr>
     <% end %>
   </tbody>
