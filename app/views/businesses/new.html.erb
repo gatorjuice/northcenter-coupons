@@ -9,7 +9,7 @@
     <% if @business.logo.attached? %>
       <%= image_tag @business.logo, class: 'rounded mx-auto d-block img-thumbnail' %>
     <% end %>
-    <%= f.file_field :logo %>
+    <%= f.file_field :logo, accept: 'image/png,image/gif,image/jpeg' %>
   </div>
   <%= f.submit 'Add Business', class: 'btn btn-northcenter' %>
 <% end %>
