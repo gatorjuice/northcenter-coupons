@@ -10,23 +10,25 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
-    <link rel="shortcut icon" href="https://chambermaster.blob.core.windows.net/userfiles/UserFiles/chambers/1775/CMS/Northcenter_favicon.png" type="image/x-icon">
+    <%= favicon_link_tag 'northcenter_favicon', rel: 'icon', type: 'image/x-icon' %>
   </head>
 
   <body>
-    <nav class="navbar fixed-top navbar-expand-lg">
+    <nav class="navbar fixed-top navbar-expand-lg navbar-dark">
       <span class="navbar-brand mb-0 h1">
-        <a href="/businesses"><img src="https://chambermaster.blob.core.windows.net/userfiles/UserFiles/chambers/1775/CMS/convert/www.northcenterchamber.com/files/436.png" width="175" height="39" alt="436.png"></a>
+        <%= link_to businesses_path do %>
+          <%= image_tag 'northcenter_logo', class: "northcenter-logo" %>
+        <% end %>
       </span>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
 
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav ml-auto">
-          <li class="nav-item active">
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item active">
 
-            <%= form_tag '/search', method: :get, class: 'form-inline my-2 my-lg-0' do %>
+          <%= form_tag '/search', method: :get, class: 'form-inline my-2 my-lg-0' do %>
             <%= text_field_tag :q, params[:q], class: 'form-control mr-sm-2', placeholder: 'Search by Business' %>
             <%= submit_tag 'Search', name: nil, class: 'btn btn-primary-northcenter my-2 my-sm-0' %>
           <% end %>
@@ -35,40 +37,40 @@
     </div>
   </nav>
 
-  <div class='container'>
-    <% flash.each do |level, message| %>
-      <div class="alert alert-<%= level %> alert-dismissible" role="alert">
-        <%= message %>
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-    <% end %>
+    <div class='container'>
+      <% flash.each do |level, message| %>
+        <div class="alert alert-<%= level %> alert-dismissible" role="alert">
+          <%= message %>
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+      <% end %>
 
-    <%= yield %>
+      <%= yield %>
 
-  </div>
-
-  <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
-  <nav class="navbar fixed-bottom navbar-expand-lg">
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav mr-auto">
-        <li class="nav-item active">
-          <% if current_admin %>
-            <%= link_to "Log out - #{current_admin.email}", destroy_admin_session_path, method: :delete, class: 'nav-link' %>
-            <%= link_to 'Add a New Business', new_business_path %>
-          <% else %>
-            <%= link_to 'Admin log in', new_admin_session_path, class: 'nav-link' %>
-          <% end %>
-        </li>
-      </ul>
     </div>
-  </nav>
-</body>
+
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    <nav class="navbar fixed-bottom navbar-expand-lg">
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item active">
+            <% if current_admin %>
+              <%= link_to "Log out - #{current_admin.email}", destroy_admin_session_path, method: :delete, class: 'nav-link' %>
+              <%= link_to 'Add a New Business', new_business_path %>
+            <% else %>
+              <%= link_to 'Admin log in', new_admin_session_path, class: 'nav-link' %>
+            <% end %>
+          </li>
+        </ul>
+      </div>
+    </nav>
+  </body>
 </html>
