@@ -2,6 +2,9 @@
   <p class="float-right"><%= link_to '+ add a coupon', new_business_coupon_path(@business) %></p>
 <% end %>
 
+<% if @business.logo.attached? %>
+  <%= image_tag @business.logo, class: 'rounded mx-auto d-block img-thumbnail' %>
+<% end %>
 <h2><%= @business.name %></h2>
 
 <% if current_admin %>
@@ -17,3 +20,4 @@
     </div>
   </div>
 <% end %>
+

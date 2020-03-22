@@ -21,6 +21,15 @@ RSpec.describe BusinessesController, type: :controller do
       it 'creates a business' do
         expect { create_business }.to change { Business.count }.by(1)
       end
+
+      context 'when adding a logo' do
+        let(:params) { { business: attributes_for(:business, :with_logo) } }
+
+        it 'adds the logo to the business' do
+          create_business
+          expect(Business.last.logo.attached?).to eq(true)
+        end
+      end
     end
 
     context 'when admin is not signed in' do
