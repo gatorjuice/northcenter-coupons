@@ -35,7 +35,5 @@ module NorthcenterCoupons
       # Don't generate rails views test files
       g.view_specs = false
     end
-
-    config.serve_static_assets = true
   end
 end
