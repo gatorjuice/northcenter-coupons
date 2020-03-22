@@ -4,6 +4,6 @@
     <%= f.text_field :name, class: 'form-control' %>
     <small id="nameHelp" class="form-text text-muted">Update the businesses name</small>
   </div>
-  <%= f.submit 'Update Business', class: 'btn btn-northcenter' %>
+  <%= f.submit 'Update Business', class: 'btn btn-primary' %>
   <%= link_to "Delete Business", business_path(@business), method: :delete, data: { confirm: "You sure?" } %>
 <% end %>

@@ -7,7 +7,7 @@
       Valid <%= @coupon.start_date %> - <%= @coupon.end_date %>
     </div>
     <div class="btn-group" role="group" aria-label="coupon buttons">
-      <%= link_to 'Back', business_path(@coupon.business), class: 'btn btn-northcenter' %>
+      <%= link_to 'Back', business_path(@coupon.business), class: 'btn btn-primary' %>
       <% if current_admin %>
         <%= link_to 'Edit Coupon', edit_coupon_path(@coupon), class: 'btn btn-warning' %>
       <% end %>
