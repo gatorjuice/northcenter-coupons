@@ -24,6 +24,15 @@ RSpec.describe BusinessesController, type: :controller do
       it 'updates the business' do
         expect(business.reload.name).to eq('New Name')
       end
+
+      context 'when updating a logo' do
+        let(:params) { { id: business.id, business: attributes_for(:business, :with_logo) } }
+
+        it 'adds the logo to the business' do
+          update_business
+          expect(business.logo.attached?).to eq(true)
+        end
+      end
     end
 
     context 'when admin is not signed in' do
