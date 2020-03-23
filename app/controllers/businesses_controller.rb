@@ -3,7 +3,6 @@
 class BusinessesController < ApplicationController
   before_action :authenticate_admin!, only: %w[new create edit update destroy]
   before_action :set_business, only: %w[show edit update destroy]
-  before_action :redirect_if_search_param_missing, only: :search
 
   def index
     @businesses = Business.order(:name)
@@ -48,13 +47,10 @@ class BusinessesController < ApplicationController
 
   def search
     @businesses = Business.search(search_param)
-
-    if @businesses.empty?
-      flash[:success] = 'No results found.'
-      redirect_to businesses_path
-    else
-      render :index
-    end
+    render :index
+  rescue ArgumentError
+    flash[:success] = 'No results found.'
+    redirect_to businesses_path
   end
 
   private
@@ -65,10 +61,6 @@ class BusinessesController < ApplicationController
 
   def search_param
     params[:q]
-  end
-
-  def redirect_if_search_param_missing
-    redirect_to businesses_path && return if search_param.blank?
   end
 
   def business_params

@@ -26,7 +26,7 @@ RSpec.describe BusinessesController, type: :controller do
       let(:params) { { q: '' } }
 
       it 'redirects to the index action' do
-        expect(response).to render_template(:index)
+        expect(response).to have_http_status(:redirect)
       end
     end
   end
