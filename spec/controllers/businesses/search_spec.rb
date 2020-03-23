@@ -25,7 +25,7 @@ RSpec.describe BusinessesController, type: :controller do
     context 'when the query string is empty' do
       let(:params) { { q: '' } }
 
-      it 'redirects to the index action if the query is an empty string' do
+      it 'redirects to the index action' do
         expect(response).to render_template(:index)
       end
     end

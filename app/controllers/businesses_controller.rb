@@ -47,10 +47,7 @@ class BusinessesController < ApplicationController
   end
 
   def search
-    @businesses = Business.where(
-      'LOWER(name) LIKE ?',
-      "%#{search_param.downcase}%"
-    ).order(:name)
+    @businesses = Business.search(search_param)
 
     if @businesses.empty?
       flash[:success] = 'No results found.'
