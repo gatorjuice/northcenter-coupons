@@ -3,6 +3,7 @@
 class BusinessesController < ApplicationController
   before_action :authenticate_admin!, only: %w[new create edit update destroy]
   before_action :set_business, only: %w[show edit update destroy]
+  before_action :redirect_if_search_param_missing, only: :search
 
   def index
     @businesses = Business.order(:name)
@@ -46,8 +47,17 @@ class BusinessesController < ApplicationController
   end
 
   def search
-    @businesses = Business.where('LOWER(name) LIKE ?', "%#{search_params.downcase}%")
-    render :index
+    @businesses = Business.where(
+      'LOWER(name) LIKE ?',
+      "%#{search_param.downcase}%"
+    ).order(:name)
+
+    if @businesses.empty?
+      flash[:success] = 'No results found.'
+      redirect_to businesses_path
+    else
+      render :index
+    end
   end
 
   private
@@ -56,8 +66,12 @@ class BusinessesController < ApplicationController
     @business = Business.find(params.require(:id))
   end
 
-  def search_params
-    params.require(:q)
+  def search_param
+    params[:q]
+  end
+
+  def redirect_if_search_param_missing
+    redirect_to businesses_path && return if search_param.blank?
   end
 
   def business_params
