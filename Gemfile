@@ -43,8 +43,8 @@ gem 'aws-sdk-s3', require: false
 gem 'barby'
 
 group :test do
-  gem 'simplecov', require: false
   gem 'shoulda-matchers'
+  gem 'simplecov', require: false
 end
 
 group :development, :test do
