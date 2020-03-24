@@ -52,12 +52,12 @@ ActiveRecord::Schema.define(version: 2020_03_24_024943) do
     t.string "name", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "street_1"
+    t.string "street_1", default: "", null: false
     t.string "street_2"
-    t.string "city"
-    t.string "state"
-    t.string "zip"
-    t.string "phone"
+    t.string "city", default: "", null: false
+    t.string "state", default: "", null: false
+    t.string "zip", default: "", null: false
+    t.string "phone", default: "", null: false
   end
 
   create_table "coupons", force: :cascade do |t|
