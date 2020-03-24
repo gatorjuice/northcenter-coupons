@@ -46,8 +46,11 @@ class BusinessesController < ApplicationController
   end
 
   def search
-    @businesses = Business.where('LOWER(name) LIKE ?', "%#{search_params.downcase}%")
+    @businesses = Business.search(search_param)
     render :index
+  rescue ArgumentError
+    flash[:success] = 'No results found.'
+    redirect_to businesses_path
   end
 
   private
@@ -56,8 +59,8 @@ class BusinessesController < ApplicationController
     @business = Business.find(params.require(:id))
   end
 
-  def search_params
-    params.require(:q)
+  def search_param
+    params[:q]
   end
 
   def business_params
