@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_03_24_024943) do
+ActiveRecord::Schema.define(version: 2020_03_25_024047) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -58,6 +58,9 @@ ActiveRecord::Schema.define(version: 2020_03_24_024943) do
     t.string "state", default: "", null: false
     t.string "zip", default: "", null: false
     t.string "phone", default: "", null: false
+    t.index ["name"], name: "index_businesses_on_name", unique: true
+    t.index ["phone"], name: "index_businesses_on_phone", unique: true
+    t.index ["street_1"], name: "index_businesses_on_street_1", unique: true
   end
 
   create_table "coupons", force: :cascade do |t|
