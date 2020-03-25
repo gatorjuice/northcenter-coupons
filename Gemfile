@@ -43,6 +43,7 @@ gem 'aws-sdk-s3', require: false
 gem 'barby'
 
 group :test do
+  gem 'shoulda-matchers'
   gem 'simplecov', require: false
 end
 
@@ -56,6 +57,7 @@ group :development, :test do
 end
 
 group :development do
+  gem 'active_record_doctor'
   # Access an interactive console on exception pages or by calling 'console' anywhere in the code.
   gem 'listen', '>= 3.0.5', '< 3.3'
   gem 'web-console', '>= 3.3.0'
