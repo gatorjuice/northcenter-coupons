@@ -36,7 +36,7 @@
 <div class="form-group">
   <%= label_tag(:logo, 'Logo') %>
   <% if @business.logo.attached? %>
-    <%= image_tag @business.logo, class: 'jumbotron mt-3 rounded mx-auto d-block img-thumbnail' %>
+    <%= image_tag @business.logo, class: 'rounded mx-auto d-block img-thumbnail' %>
   <% end %>
   <%= f.file_field :logo, accept: 'image/png,image/gif,image/jpeg' %>
 </div>
