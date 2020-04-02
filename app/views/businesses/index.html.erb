@@ -1,21 +1,17 @@
 <% @businesses.each do |business| %>
-  <div class="row">
-    <div class="col">
-      <% if business.logo.attached? %>
-        <div class="card">
-          <%= link_to business_path(business) do %>
-            <%= image_tag business.logo, class: 'img-fluid img-thumbnail' %>
-          <% end %>
-        </div>
-      <% else %>
-        <%= link_to business_path(business) do %>
-          <div class="card">
-              <div class="card-body">
-                <%= link_to business.name, business_path(business), class: 'card-text' %>
-              </div>
-          </div>
-        <% end %>
+  <% if business.logo.attached? %>
+    <div class="card business-index-card">
+      <%= link_to business_path(business) do %>
+        <%= image_tag business.logo, class: 'img-fluid img-thumbnail' %>
       <% end %>
     </div>
-  </div>
+  <% else %>
+    <%= link_to business_path(business) do %>
+      <div class="card business-index-card">
+          <div class="card-body">
+            <%= link_to business.name, business_path(business), class: 'card-text' %>
+          </div>
+      </div>
+    <% end %>
+  <% end %>
 <% end %>
