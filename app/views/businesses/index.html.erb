@@ -1,21 +1,17 @@
-<table class="table">
-  <thead class="table-header">
-    <tr>
-      <th scope="col">Businesses</th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @businesses.each do |business| %>
-      <tr>
-        <td>
-          <%= link_to business.name, business_path(business) %>
-        </td>
-        <td>
-          <% if business.logo.attached? %>
-            <%= image_tag business.logo, class: 'rounded float-right img-thumbnail' %>
-          <% end %>
-        </td>
-      </tr>
+<% @businesses.each do |business| %>
+  <% if business.logo.attached? %>
+    <div class="card business-index-card">
+      <%= link_to business_path(business) do %>
+        <%= image_tag business.logo, class: 'img-fluid img-thumbnail', alt: "#{business.name} logo" %>
+      <% end %>
+    </div>
+  <% else %>
+    <%= link_to business_path(business) do %>
+      <div class="card business-index-card">
+          <div class="card-body">
+            <%= link_to business.name, business_path(business), class: 'card-text' %>
+          </div>
+      </div>
     <% end %>
-  </tbody>
-</table>
+  <% end %>
+<% end %>

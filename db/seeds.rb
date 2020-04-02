@@ -4,6 +4,7 @@ Admin.create!(
   email: 'test@test.com',
   password: 'password'
 )
+
 dev_business = Business.create!(
   name: 'Dev Business',
   street_1: 'dev street',
@@ -12,6 +13,7 @@ dev_business = Business.create!(
   state: 'IL',
   zip: '60614'
 )
+
 Coupon.create!(
   name: "20\% off!",
   description: 'welcome to dev business',
