@@ -2,7 +2,7 @@
   <% if business.logo.attached? %>
     <div class="card business-index-card">
       <%= link_to business_path(business) do %>
-        <%= image_tag business.logo, class: 'img-fluid img-thumbnail' %>
+        <%= image_tag business.logo, class: 'img-fluid img-thumbnail', alt: "#{business.name} logo" %>
       <% end %>
     </div>
   <% else %>
